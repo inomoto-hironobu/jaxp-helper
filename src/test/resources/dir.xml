@@ -1,0 +1,6 @@
+<dir xmlns="urn:dir" name="test">
+    <dir name="test2">
+        <file name="test3"/>
+    </dir>
+    <file name="test4"/>
+</dir>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d1 xmlns="http://hoge.com" xmlns:foo="http://foo.com">
+	<d2>test</d2>
+	<d2 href="test">
+		<d3>
+			<d4>test</d4>
+			<foo:d4>
+				test
+				<d5>test</d5>
+			</foo:d4>
+		</d3>
+	</d2>
+	<d2>
+		<d3 xmlns="http://bar.com">
+			test
+		</d3>
+	</d2>
+</d1>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.example.org/properties"
+	elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.example.org/properties" version="1.1">
+	<xs:import namespace="http://www.w3.org/2001/XMLSchema"
+		schemaLocation="https://www.w3.org/2001/XMLSchema.xsd"></xs:import>
+	<xs:element name="properties">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="pb">
+					<xs:annotation>
+						<xs:documentation>simpleTypeは値のあるべき型を規定しヒントを与えるもの</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="xs:simpleType" minOccurs="0"/>
+							<xs:element name="v" type="xs:string"/>
+						</xs:sequence>
+						<xs:attribute name="n" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="pa">
+					<xs:annotation>
+						<xs:documentation>t属性は値のあるべき型を規定しヒントを与えるもの</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:attribute name="n" type="xs:string" use="required"/>
+						<xs:attribute name="t" type="xs:QName" />
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="properties.restriction">
+			<xs:selector xpath="tns:pa|tns:pb"></xs:selector>
+			<xs:field xpath="@n"></xs:field>
+		</xs:unique>
+	</xs:element>
+</xs:schema>

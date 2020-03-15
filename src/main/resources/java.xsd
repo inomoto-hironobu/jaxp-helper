@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="java" targetNamespace="java"
+	elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mml="http://www.w3.org/1998/Math/MathML">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+		schemaLocation="http://www.w3.org/2001/xml.xsd" />
+	<xs:import
+		namespace="http://www.w3.org/1998/Math/MathML"
+		schemaLocation="http://www.w3.org/Math/XMLSchema/mathml3/mathml3.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-framework-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-attribs-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-text-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-hypertext-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-list-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-bdo-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-basic-table-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-image-1.xsd" />
+	<xs:include
+		schemaLocation="http://www.w3.org/MarkUp/SCHEMA/xhtml-ruby-1.xsd" />
+	
+	<xs:attributeGroup name="xhtml.Common.extra" />
+	<xs:attributeGroup name="xhtml.Core.extra.attrib" />
+	<xs:attributeGroup name="xhtml.I18n.extra.attrib" />
+	<xs:attributeGroup
+		name="xhtml.Global.core.extra.attrib" />
+	<xs:attributeGroup
+		name="xhtml.Global.I18n.extra.attrib" />
+	<xs:attributeGroup name="xhtml.Global.Common.extra" />
+	<xs:group name="xhtml.FlowNoTable.mix">
+		<xs:choice>
+			<xs:element name="var" type="xhtml.var.type" />
+		</xs:choice>
+	</xs:group>
+	<xs:group name="xhtml.Inline.mix">
+		<xs:choice>
+			<xs:element name="abbr" type="xhtml.abbr.type" />
+			<xs:element name="quote" type="xhtml.q.type"></xs:element>
+			<xs:element name="cite" type="xhtml.cite.type" />
+			<xs:element name="span" type="xhtml.span.type" />
+			<xs:element name="var" type="xhtml.var.type" />
+			<xs:element name="kbd" type="xhtml.kbd.type"></xs:element>
+			<xs:element name="samp" type="xhtml.samp.type"></xs:element>
+			<xs:element name="link" type="xhtml.a.type" />
+			<xs:element name="ruby" type="xhtml.ruby.type" />
+			<xs:element ref="mml:math"></xs:element>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="xhtml.Flow.mix">
+		<xs:choice>
+			<xs:element name="p" type="xhtml.p.type" />
+			<xs:element name="blockquote" type="xhtml.blockquote.type" />
+			<xs:element name="pre" type="xhtml.pre.type" />
+			<xs:element name="ul" type="xhtml.ul.type"></xs:element>
+			<xs:element name="ol" type="xhtml.ol.type"></xs:element>
+			<xs:element name="dl" type="xhtml.dl.type" />
+			<xs:element name="table" type="xhtml.table.type" />
+		</xs:choice>
+	</xs:group>
+	<xs:group name="xhtml.Block.mix">
+		<xs:choice>
+			<xs:element name="div" type="xhtml.div.type" />
+		</xs:choice>
+	</xs:group>
+	<xs:group name="xhtml.InlNoAnchor.mix">
+		<xs:choice>
+			<xs:element name="span" type="xhtml.span.type" />
+		</xs:choice>
+	</xs:group>
+	<xs:group name="xhtml.InlinePre.mix">
+		<xs:choice>
+			<xs:element name="p" type="xhtml.p.type" />
+		</xs:choice>
+	</xs:group>
+	<xs:group name="xhtml.InlNoRuby.mix">
+		<xs:choice></xs:choice>
+	</xs:group>
+	<xs:element name="documentation">
+		<xs:complexType>
+			<xs:group ref="xhtml.Flow.mix" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- /member -->
+	<xs:element name="signature">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="xhtml.Flow.mix" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="class">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="documentation" />
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="field">
+						<xs:complexType>
+							<xs:group ref="xhtml.Flow.mix" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:attribute name="name" use="required"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="method">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="signature" minOccurs="0"
+									maxOccurs="unbounded" />
+							</xs:sequence>
+							<xs:attribute name="name" use="required"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="constructor">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="signature" minOccurs="0"
+									maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="name" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="package">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="documentation" />
+				<xs:element ref="class" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:NCName" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="java">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="package" minOccurs="0"
+					maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
