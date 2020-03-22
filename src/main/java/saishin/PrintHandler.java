@@ -6,13 +6,14 @@ import java.io.PrintStream;
 import java.util.Objects;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.ext.DefaultHandler2;
 
-public class PrintHandler extends DefaultHandler2 {
+public class PrintHandler extends DefaultHandler2 implements ErrorHandler  {
 
 	private PrintStream out;
 	private PrintStream err;

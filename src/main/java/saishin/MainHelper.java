@@ -22,15 +22,17 @@ import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.xml.sax.SAXException;
 
+import saishin.impl.HelperResolver;
+
 /**
  * JAXPを助けるユーティリティクラス
  */
-public final class JAXPHelper {
+public final class MainHelper {
 
 	public static final DocumentBuilderFactory dbf = xercesDocumentBuilderFactory();
 	public static final DocumentBuilder db = xercesDocumentBuilder();
 	
-	private JAXPHelper() {
+	private MainHelper() {
 	}
 
 	public static DOMImplementation t() {
@@ -77,7 +79,7 @@ public final class JAXPHelper {
 	}
 	public static DocumentBuilder xercesDocumentBuilder() {
 		try {
-			return JAXPHelper.dbf.newDocumentBuilder();
+			return MainHelper.dbf.newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +87,7 @@ public final class JAXPHelper {
 		}
 	}
 	public static Document doc(String string) throws FileNotFoundException, SAXException, IOException {
-		return JAXPHelper.db.parse(new FileInputStream(string));
+		return MainHelper.db.parse(new FileInputStream(string));
 	}
 
 	/**

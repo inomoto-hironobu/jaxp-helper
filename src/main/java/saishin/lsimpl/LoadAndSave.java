@@ -10,7 +10,7 @@ import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSParser;
 import org.w3c.dom.ls.LSSerializer;
 
-import saishin.JAXPHelper;
+import saishin.MainHelper;
 
 public class LoadAndSave implements DOMImplementation, DOMImplementationLS {
 

@@ -30,14 +30,14 @@ public class Fdom {
     		
     	}
     }
-    public static void ifAttr(Node node, String name, Consumer<?> consumer, String value) {
+    public static <T> void ifAttr(Node node, String name, Consumer<T> consumer, String value) {
     	if(node.getNodeType() == Node.ELEMENT_NODE) {
     		if(node.getAttributes().getNamedItem(name) != null) {
     			
     		}
     	}
     }
-    public static void ifAttr(Node node, String name, Consumer<?> consumer) {
+    public static <T> void ifAttr(Node node, String name, Consumer<T> consumer) {
     	ifAttr(node, name, consumer, null);
     }
     /**

@@ -37,7 +37,7 @@ class DomHelperTest {
 	public void testQuerySelecter() {
 		Document test2;
 		try {
-			test2 = JAXPHelper.doc("/test2.xml");
+			test2 = MainHelper.doc("/test2.xml");
 			DomHelper.querySelecter(test2, "#test");
 		} catch (SAXException | IOException e) {
 			e.printStackTrace();
@@ -49,7 +49,7 @@ class DomHelperTest {
 	public void test() {
 		Document test;
 		try {
-			test = JAXPHelper.doc("/test.xml");
+			test = MainHelper.doc("/test.xml");
 			System.out.println(System.currentTimeMillis());
 
 			System.out.println(System.currentTimeMillis());

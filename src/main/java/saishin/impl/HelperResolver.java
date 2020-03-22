@@ -1,4 +1,4 @@
-package saishin;
+package saishin.impl;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

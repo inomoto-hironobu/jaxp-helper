@@ -30,9 +30,9 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import saishin.HelperResolver;
-import saishin.JAXPHelper;
+import saishin.MainHelper;
 import saishin.PrintHandler;
+import saishin.impl.HelperResolver;
 
 public class JaxpHelperTest {
 
@@ -87,11 +87,11 @@ public class JaxpHelperTest {
 	@Test
 	public void testDump() {
 		DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-		JAXPHelper.dump(System.out, f);
+		MainHelper.dump(System.out, f);
 		try {
 			DocumentBuilder b = f.newDocumentBuilder();
-			JAXPHelper.dump(System.out, b);
-			JAXPHelper.dump(System.out, b.getDOMImplementation());
+			MainHelper.dump(System.out, b);
+			MainHelper.dump(System.out, b.getDOMImplementation());
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
