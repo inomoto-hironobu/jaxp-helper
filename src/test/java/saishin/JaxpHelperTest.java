@@ -4,7 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static saishin.Util.doc;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import javax.xml.XMLConstants;
@@ -36,9 +42,14 @@ import saishin.impl.HelperResolver;
 
 public class JaxpHelperTest {
 
-	HelperResolver resolver = new HelperResolver(Paths.get(System.getProperty("user.home"), ".entity"));
+	HelperResolver resolver;
+	PrintHandler handler = new PrintHandler(System.out, System.err);
+	SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
+		Logger.getGlobal().addHandler(new ConsoleHandler());
 	}
 
 	@AfterAll
@@ -47,7 +58,7 @@ public class JaxpHelperTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-
+		
 	}
 
 	@AfterEach
@@ -120,46 +131,4 @@ public class JaxpHelperTest {
 	}
 
 
-	@Test
-	public void testResolver() {
-		try {
-			HelperResolver resolver = new HelperResolver(Paths.get(System.getProperty("user.home"), ".entity"));
-			resolver.resolveEntity("-//W3C//DTD XHTML 1.0 Strict//EN",
-					"https://www.w3.org/Graphics/SVG/1.2/rng/Tiny-1.2/Tiny-1.2.rng");
-			resolver.resolveEntity(""
-					, "-//W3C//DTD XHTML 1.0 Strict//EN"
-					, "https://www.w3.org/Graphics/SVG/1.2/rng/Tiny-1.2/Tiny-1.2.rng"
-					, "https://www.w3.org/Graphics/SVG/1.2/rng/Tiny-1.2/Tiny-1.2.rng");
-
-		} catch (SAXException | IOException e) {
-			fail(e);
-		}
-
-	}
-	@Test
-	public void testResolverSchema() {
-		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		PrintHandler handler = new PrintHandler(System.out, System.err);
-		
-		sf.setResourceResolver(resolver);
-		sf.setErrorHandler(handler);
-		try {
-			XMLReader reader = XMLReaderFactory.createXMLReader();
-			reader.setFeature("http://xml.org/sax/features/validation", false);
-			reader.setFeature("http://xml.org/sax/features/namespaces", true);
-			reader.setEntityResolver(resolver);
-			reader.setErrorHandler(handler);
-			reader.setContentHandler(handler);
-			reader.setDTDHandler(handler);
-			SAXSource so = new SAXSource(
-					reader,
-					new InputSource(
-							new InputStreamReader(get("/dir.xsd"), "UTF-8")));
-			sf.newSchema(so);
-		} catch (SAXException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-			fail();
-		}
-		
-	}
 }

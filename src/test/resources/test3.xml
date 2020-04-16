@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE d1 [
+	<!ELEMENT d1 (#PCDATA)>
+]>
+<d1></d1>

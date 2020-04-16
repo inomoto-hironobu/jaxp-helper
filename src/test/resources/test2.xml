@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE d1 PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+ "http://www.w3.org/TR/html4/frameset.dtd">
 <d1 xmlns="http://hoge.com" xmlns:foo="http://foo.com">
 	<d2>test</d2>
 	<d2 href="test">

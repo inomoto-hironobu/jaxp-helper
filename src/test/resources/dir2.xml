@@ -1,0 +1,9 @@
+<dir name="test"
+	xmlns="urn:dir"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:dir dir.xsd">
+    <dir name="test2">
+        <file name="test3"/>
+    </dir>
+    <file name="test4"/>
+</dir>
